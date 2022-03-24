@@ -17,7 +17,6 @@
 		EFB7416D27EB080000D685C3 /* FormUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7416C27EB080000D685C3 /* FormUITests.swift */; };
 		EFB7416F27EB080000D685C3 /* FormUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7416E27EB080000D685C3 /* FormUITestsLaunchTests.swift */; };
 		EFB7417C27EB0F0600D685C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7417B27EB0F0600D685C3 /* User.swift */; };
-		EFB7417E27EC15F900D685C3 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7417D27EC15F900D685C3 /* DisplayController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +51,6 @@
 		EFB7416C27EB080000D685C3 /* FormUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUITests.swift; sourceTree = "<group>"; };
 		EFB7416E27EB080000D685C3 /* FormUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EFB7417B27EB0F0600D685C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		EFB7417D27EC15F900D685C3 /* DisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +104,6 @@
 				EFB7414B27EB07FF00D685C3 /* AppDelegate.swift */,
 				EFB7414D27EB07FF00D685C3 /* SceneDelegate.swift */,
 				EFB7414F27EB07FF00D685C3 /* ViewController.swift */,
-				EFB7417D27EC15F900D685C3 /* DisplayController.swift */,
 				EFB7415127EB07FF00D685C3 /* Main.storyboard */,
 				EFB7417B27EB0F0600D685C3 /* User.swift */,
 				EFB7415427EB080000D685C3 /* Assets.xcassets */,
@@ -265,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFB7417C27EB0F0600D685C3 /* User.swift in Sources */,
-				EFB7417E27EC15F900D685C3 /* DisplayController.swift in Sources */,
 				EFB7415027EB07FF00D685C3 /* ViewController.swift in Sources */,
 				EFB7414C27EB07FF00D685C3 /* AppDelegate.swift in Sources */,
 				EFB7414E27EB07FF00D685C3 /* SceneDelegate.swift in Sources */,
