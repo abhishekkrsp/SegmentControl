@@ -7,31 +7,52 @@
 
 import Foundation
 
-class User {
-    var firstname: String
-    var lastName: String
-    var gender: String?
-    var age: Int
+@propertyWrapper
+struct GreaterThanTwenty {
+    private var number: Int?
+    var wrappedValue: Int? {
+        get { return number }
+        set {
+            if let newValue = newValue, newValue > 20 {
+                number = newValue
+            } else {
+                number = nil
+            }
+        }
+    }
+}
+
+struct User {
+    private var firstname: String
+    private var lastName: String
+    private var gender: String?
+    @GreaterThanTwenty private var age: Int?
     
-    init(firstName: String, lastName: String, gender: String?, age: Int
+    init?(firstName: String?, lastName: String?, gender: String?, age: Int?
     ) {
+        guard let firstName = firstName, let lastName = lastName, !firstName.isEmpty, !lastName.isEmpty else {
+            return nil
+        }
         self.firstname = firstName
         self.lastName = lastName
         self.gender = gender
         self.age = age
+        if self.age == nil {
+            return nil
+        }
+    }
+    func printIdentity() -> String {
+        return "Name: \(firstname + " " + lastName)\n Age: \(age ?? 0)\n Gender: \(gender ?? "Not Provided")"
     }
 }
 
 enum Gender: String,CaseIterable {
-//    case None
     case Male
     case Female
     case Other
     
     var description: String {
         switch self {
-//        case .None:
-//            return "None"
         case .Male:
             return "Male"
         case .Female:

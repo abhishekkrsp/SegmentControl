@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "002C2367-E54A-45F9-995E-1C81B8E2482D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Form/ViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "actionForSubmit(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4B9D2B13-9BE5-42D5-8F5E-7DA083A390FA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -30,10 +14,58 @@
             filePath = "Form/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "actionForSubmit(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F358B3B1-0624-48A4-963C-B8879FD6EF82"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Form/User.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "wrappedValue"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "F358B3B1-0624-48A4-963C-B8879FD6EF82 - 23f59a65c71e1ce0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Form.GreaterThanTwenty.wrappedValue.setter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "Form"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abhishekkumar/Desktop/Git/Form/Form/User.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "F358B3B1-0624-48A4-963C-B8879FD6EF82 - 23f59a65c71e1ce0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Form.GreaterThanTwenty.wrappedValue.setter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "Form"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abhishekkumar/Desktop/Git/Form/Form/User.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
+    //MARK: Variables, Constants, Outlets
     @IBOutlet weak var firstName: UITextField!
     
     @IBOutlet weak var lastName: UITextField!
@@ -18,21 +19,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var age: UITextField!
     
     @IBOutlet weak var submit: UIButton!
-    var user: User?
-    var dataFirstName: String?
-    var dataLastName: String?
-    var dataAge: Int?
-    var dataGender: String?
     
-    @IBAction func actionForSubmit(_ sender: Any) {
-        print(genderOptions.selectedSegmentIndex)
-        dataGender = genderOptions.selectedSegmentIndex >= 0 ? genderOptions.titleForSegment(at: genderOptions.selectedSegmentIndex) : nil
-        guard let dataFirstName = dataFirstName, let dataLastName = dataLastName, let dataAge = dataAge else {
-            return
-        }
-        user = User(firstName: dataFirstName, lastName: dataLastName, gender: dataGender, age: dataAge)
-        showAlert(with: "Sucess", and: "Name: \(dataFirstName + " " + dataLastName)\n Age: \(dataAge)\n Gender: \(user?.gender ?? "Not Provided")")
-    }
+    @IBOutlet weak var scrollView: UIScrollView!
+    private var user: User?
+    private var dataFirstName: String?
+    private var dataLastName: String?
+    private var dataAge: Int?
+    private var dataGender: String?
+    
+    //MARK: Overrided Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         optionsForGender()
@@ -40,13 +36,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         lastName.delegate = self
         age.delegate = self
         firstName.becomeFirstResponder()
+        
+        addDoneCancelToolbar(age)
+        
+        //MARK: Notification Obserbers
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
-    func optionsForGender() {
-        genderOptions.removeAllSegments()
-        for gender in Gender.allCases {
-            genderOptions.insertSegment(withTitle: gender.rawValue, at: genderOptions.numberOfSegments, animated: true)
+    // MARK: Actions
+    @IBAction func actionForSubmit(_ sender: Any) {
+        if let user = user {
+            showAlert(with: "Sucess", and: user.printIdentity())
         }
+    }
+    @IBAction func actonForSegmentControl(_ sender: UISegmentedControl) {
+        dataGender = sender.titleForSegment(at: sender.selectedSegmentIndex)
     }
     
     //MARK: TextFieldDelegate
@@ -59,19 +65,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case 555:
             dataAge = Int(textField.text ?? "0")
         default:
-            print("under default")
+            log("Default textFieldDidChangeSelection")
         }
-        
-        guard let dataFirstName = dataFirstName, let dataLastName = dataLastName, let dataAge = dataAge else {
+        user = User(firstName: dataFirstName, lastName: dataLastName, gender: dataGender, age: dataAge)
+        guard user != nil else {
             submit.isEnabled = false
             return
         }
-        
-        if dataFirstName.isEmpty || dataLastName.isEmpty || dataAge <= 20 {
-            submit.isEnabled = false
-            return
-        }
-        
         submit.isEnabled = true
     }
     
@@ -110,24 +110,60 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func showAlert(with title: String, and message: String) {
+    //MARK: Custom Functions
+    private func showAlert(with title: String, and message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            switch action.style {
-            case .default:
-                print("default")
-                
-            case .cancel:
-                print("cancel")
-                
-            case .destructive:
-                print("destructive")
-                
-            default:
-                print("unknown")
-            }
-        }))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: .none))
         self.present(alert, animated: true, completion: nil)
     }
-}
+    
+    private func optionsForGender() {
+        genderOptions.removeAllSegments()
+        for gender in Gender.allCases {
+            genderOptions.insertSegment(withTitle: gender.rawValue, at: genderOptions.numberOfSegments, animated: true)
+        }
+    }
+    
+    func addDoneCancelToolbar(_ sender: UITextField) {
+        let onCancel = (target: self, action: #selector(cancelButtonTapped))
+        let onDone = (target: self, action: #selector(doneButtonTapped))
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .black
+        toolbar.items = [
+            UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: onCancel.action),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .plain, target: self, action: onDone.action)
+        ]
+        toolbar.sizeToFit()
+        sender.inputAccessoryView = toolbar
+    }
+    
+    // MARK: Selectors
+    @objc func cancelButtonTapped(_ sender: UITextField) { view.endEditing(true)}
+    @objc func doneButtonTapped(_ sender: UITextField) { view.endEditing(true)}
 
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+
+        guard let userInfo = notification.userInfo else { return }
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 25
+        scrollView.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+    }
+    
+    //MARK: Debug logs
+    private func log(_ expression: @autoclosure () -> Any) {
+        #if DEBUG
+        print(expression())
+        #endif
+    }
+}
